@@ -502,15 +502,20 @@ uis.controller('uiSelectCtrl',
 
         $scope.$broadcast('uis:select', item);
 
-        var locals = {};
-        locals[ctrl.parserResult.itemName] = item;
+        if (ctrl.onBeforeSelectCallback($scope, {
+              $item: item,
+              $current: ctrl.selected
+            })) {
+            var locals = {};
+            locals[ctrl.parserResult.itemName] = item;
 
-        $timeout(function(){
-          ctrl.onSelectCallback($scope, {
-            $item: item,
-            $model: ctrl.parserResult.modelMapper($scope, locals)
-          });
-        });
+            $timeout(function(){
+                ctrl.onSelectCallback($scope, {
+                $item: item,
+                $model: ctrl.parserResult.modelMapper($scope, locals)
+                });
+            });
+        }
 
         if (ctrl.closeOnSelect) {
           ctrl.close(skipFocusser);
@@ -774,6 +779,7 @@ uis.directive('uiSelect',
 
         $select.onSelectCallback = $parse(attrs.onSelect);
         $select.onRemoveCallback = $parse(attrs.onRemove);
+        $select.onBeforeSelectCallback = $parse(attrs.onBeforeSelect);
         
         //Set reference to ngModel from uiSelectCtrl
         $select.ngModel = ngModel;
