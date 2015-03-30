@@ -2,7 +2,7 @@
   "name": "ui-select",
   "main": "dist/select.js",
   "author": "http://github.com/angular-ui/ui-select/graphs/contributors",
-  "homepage": "http://github.com/angular-ui/ui-select",
+  "homepage": "http://github.com/kevensya/ui-select",
   "repository": {
     "url": "git://github.com/kevensya/ui-select.git"
   },
