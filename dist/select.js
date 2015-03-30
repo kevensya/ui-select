@@ -500,12 +500,13 @@ uis.controller('uiSelectCtrl',
           }
         }
 
-        $scope.$broadcast('uis:select', item);
-
         if (ctrl.onBeforeSelectCallback($scope, {
               $item: item,
               $current: ctrl.selected
             })) {
+            $scope.$broadcast('uis:select', item);
+
+
             var locals = {};
             locals[ctrl.parserResult.itemName] = item;
 
